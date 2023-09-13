@@ -40,6 +40,12 @@ d33N:       /MMh.     dMMMMs     -dMM.       :N33d
 
 
 
+math.randomseed(os.time())
+
+
+
+------------
+
 
 local initGroupTable = function()
   local GroupTable = {}
@@ -71,8 +77,6 @@ end
 
 
 
-
-
 local funcGetMasterLevel = function(GroupTable)
   GroupMastersTable = {}
   for key, group in pairs(GroupTable) do
@@ -93,6 +97,17 @@ end
 
 
 
+
+
+local function init()
+  local GroupTable, GroupCount = initGroupTable()
+  local GroupMastersTable = funcGetMasterLevel(GroupTable)
+end
+
+
+-----------------
+
+
 local function setGroupMasterValue(faderHandle, faderLevel)
   if type(faderLevel) == "number" then
     if faderLevel > 100 then
@@ -106,6 +121,12 @@ local function setGroupMasterValue(faderHandle, faderLevel)
       ["token"] = "Master"
     })
   end
+  --update GroupMaster table
+  init()
+  --print values
+  Printf(GroupMastersTable[1][1].name)
+  Printf(GroupMastersTable[1][2])
+
 end
 
 
@@ -127,38 +148,47 @@ local function tableProbe(GroupMastersTable, indent)
 end
 
 
+
+
+
+local function printGroups(GroupMastersTable)
+
+  for x in pairs(GroupMastersTable) do
+    Printf(GroupMastersTable[x][1].name)
+    Printf(GroupMastersTable[x][2])
+  end
+
+end
+
+
 -------------------------
 
 
-local function debug()
-
-  local GroupTable, GroupCount = initGroupTable()
-  local GroupMastersTable = funcGetMasterLevel(GroupTable)
-
-  --Print Table
-  tableProbe(GroupMastersTable)
-
-  --examples
-  --setGroupMasterValue(GroupMastersTable[1][1], 33)
-  --Printf(GroupMastersTable[1][1].name)
-  --Printf(GroupMastersTable[1][2])
 
 
-  --Print all groups and values
-  for x in pairs(GroupMastersTable) do
-    --Printf(GroupMastersTable[x][1].name)
-    --Printf(GroupMastersTable[x][2])
-    --SetVar(userVar, pluginName .. varDiv .. "Snap1" .. varDiv .. GroupMastersTable[x][1].name, GroupMastersTable[x][2])
-    --Printf(GetVar(userVar, pluginName .. varDiv .. "Snap1" .. varDiv .. GroupMastersTable[x][1].name))
+
+
+local function debug(mode)
+
+
+  if mode == "probe" then
+    --Probe
+    tableProbe(GroupMastersTable)
+
+  elseif mode == "print" then
+    --Print
+    printGroups(GroupMastersTable)
+
+  elseif mode == "setgroup" then
+    --Set random value on group
+    setGroupMasterValue(GroupMastersTable[1][1], math.random(0, 100))
   end
 
 
 
-  --SetVar(userVar, pluginName .. ":" .. "Snap1" .. ":" .. GroupMastersTable[x][1].name, GroupMastersTable)
-  --Printf(GetVar(userVar, "SnapShots"))
-  --Printf(pluginName .. "-" .. "Snap1" .. "-" .. "")
-
 end
+
+
 
 
 
@@ -167,12 +197,22 @@ end
 
 local function main()
 
+  --Banner
   Printf("GroupMasters")
   Printf("")
 
-  debug()
+  --Init group table
+  init()
+
+  debug("setgroup")
 
 end
+
+
+
+
+
+
 
 
 function GroupMasters(test)
