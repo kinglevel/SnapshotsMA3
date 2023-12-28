@@ -36,12 +36,20 @@ d33N:       /MMh.     dMMMMs     -dMM.       :N33d
 
 "Vision will blind. Severance ties. Median am I. True are all lies"
 
+███╗   ███╗███████╗███████╗██╗  ██╗██╗   ██╗ ██████╗  ██████╗  █████╗ ██╗  ██╗
+████╗ ████║██╔════╝██╔════╝██║  ██║██║   ██║██╔════╝ ██╔════╝ ██╔══██╗██║  ██║
+██╔████╔██║█████╗  ███████╗███████║██║   ██║██║  ███╗██║  ███╗███████║███████║
+██║╚██╔╝██║██╔══╝  ╚════██║██╔══██║██║   ██║██║   ██║██║   ██║██╔══██║██╔══██║
+██║ ╚═╝ ██║███████╗███████║██║  ██║╚██████╔╝╚██████╔╝╚██████╔╝██║  ██║██║  ██║
+╚═╝     ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+
 ]]--
 
 
 
 math.randomseed(os.time())
 
+require "gma3_helpers"
 
 
 ------------
@@ -196,7 +204,7 @@ end
 
 
 local function main()
-
+  --[[
   --Banner
   Printf("GroupMasters")
   Printf("")
@@ -205,6 +213,7 @@ local function main()
   init()
 
   debug("setgroup")
+  ]]--
 
 end
 
@@ -213,15 +222,112 @@ end
 
 
 
+--LEGACY
+
+function GroupMasters_Store(datapool, page, fader, var)
+  --Printf("datapool: " .. datapool)
+  --Printf("Page: " .. page)
+  --Printf("Fader: " .. fader)
+  --Printf("Var: " .. var)
+
+  local x = Root()["ShowData"]
+                  ["DataPools"]
+                  [tonumber(datapool)]
+                  ["Pages"]
+                  [tonumber(page)]
 
 
-function GroupMasters(test)
-  Printf(test)
+  local execs = x:Children()
+
+  -- search over table table
+  for i = 1, #execs do
+
+
+    -- if fader number is correct
+    if execs[i].NO == tonumber(fader) then
+      local U = execs[i]
+
+      --Get fader value
+      local MasterLevel = Obj.GetFader(U, {
+        "Master",
+        0
+      })
+
+
+      --init table if non existent
+      if groupTable == nil then
+        groupTable = {}
+      end
+
+      --store fader level
+      groupTable[var]=MasterLevel
+
+    end
+
+
+
+  end
+
 end
+
+
+function GroupMasters_Recall2(datapool, page, fader, var)
+  --Printf("datapool: " .. datapool)
+  --Printf("Page: " .. page)
+  --Printf("Fader: " .. fader)
+  --Printf("Var: " .. var)
+
+  local x = Root()["ShowData"]
+                  ["DataPools"]
+                  [tonumber(datapool)]
+                  ["Pages"]
+                  [tonumber(page)]
+
+
+  local execs = x:Children()
+
+  -- search over table table
+  for i = 1, #execs do
+
+
+    -- if fader number is correct
+    if execs[i].NO == tonumber(fader) then
+      local U = execs[i]
+
+      --Get fader value
+      Obj.SetFader(U, {
+        ["value"] = groupTable[var],
+        ["faderDisabled"] = false,
+        ["token"] = "Master"
+      })
+
+      
+    end
+
+
+
+  end
+
+end
+
+
+
+
+
+
+function GroupMasters_Recall(datapool, page, fader, var)
+  Cmd("Fadermaster executor ".. fader .." at " .. groupTable[var])
+end
+
+
+
+
 
 
 return main
 
+
+--Fadermaster executor 201 at 50
 
 
 
