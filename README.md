@@ -1,6 +1,6 @@
 # Snapshots
 
-This plugins enables the user to store and recall fader positions into Snapshots, similar to soundboards.
+This plugins enables the user to store and recall fader positions into Snapshots for GrandMA3, similar to soundboards.
 It can for example be very usefull when running a timecoded show, when the user wants to recall multiple Groupmasters
 or other executors into different positions.
 
