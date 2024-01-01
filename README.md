@@ -59,3 +59,25 @@ Lua "Snapshots_Recall('Verse'. '2')"
 ```
 Lua "Snapshots_Recall('Verse', '0', '100')"
 ```
+
+
+
+### INSTALLATION:
+
+Download the lua files, or clone this rep as a haxx0r.
+
+#### MacOS:
+```
+cd ~/MALightingTechnology/gma3_library/datapools/plugins/
+git clone git@github.com:kinglevel/SnapshotsMA3.git
+```
+
+#### Windows:
+```
+cd %ProgramData%/MALightingTechnology/gma3_library/datapools/plugins/
+git clone git@github.com:kinglevel/SnapshotsMA3.git
+```
+
+### HOW TO RUN IT:
+
+Just import the plugin in your show file, make the macros, and you should be all set.
