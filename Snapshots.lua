@@ -4,10 +4,12 @@ local signalTable    = select(3,...);
 local my_handle      = select(4,...);
 ----------------------------------------------------------------------------------------------------------------
 
--- Almost never tested
+-- Almost never tested.
+-- No support is given.
 
 -- Github: https://github.com/kinglevel
--- Please commit or post updates for the community.
+-- Instagram: @kinglevel
+-- Please commit or post updates for the community
 
 
 --[[
@@ -44,74 +46,33 @@ d33N:       /MMh.     dMMMMs     -dMM.       :N33d
 ╚═╝     ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
 
 
-----------------------------------------------------------------------------------------------------------------
+
+README: https://github.com/kinglevel/GroupMastersMA3
 
 
-This plugins enables the user to store and recall fader positions into Snapshots, similar to soundboards.
-It can for example be very usefull when running a timecoded show, when the user wants to recall multiple Groupmasters
-when the songs goes into different song structures, for example Verse, Chorus, Refrain, Bridge, Solo.
-
-With this plugin, the user can program "almost everything" at 100%, and mix it later live, to be able to adapt the dynamics
-for different venues.
-
-* Lighting propagate and bounces, just like sound.
-* Haze is sometimes different, due to ventilation and winds.
-* Audience needs a kick in their faces to wake up.
-
-This helps the operator to run the shows at ease and be able to adjust for these scenarios, semi-automatic and more accurate.
-
-It works with many diffent kinds of assigned masters on executors.
-Fade times only work with some masters, as of 1.9.7.0.
-
-
-
-USAGE:
-
-Make sure to CLEAR a snapshot before updating executors into the snapshot.
-To store a snapshot, make a macro with multiple lines.
-The structure is as follows: Snapshots_Store(datapool, page, executor, SnapshotName)
-
-
-To store a snapshot:
-
-Lua "Snapshots_Clear('Verse')"
-Lua "Snapshots_Store('1','1', '201', 'Verse')"
-Lua "Snapshots_Store('1','1', '202', 'Verse')"
-Lua "Snapshots_Store('1','1', '203', 'Verse')"
-Lua "Snapshots_Store('1','1', '204', 'Verse')"
-
-
-
-To recall a snapshot, simply make a macro with:
-Lua "Snapshots_Recall('Verse')"
-
-
-Optional add a fadetime:
-Lua "Snapshots_Recall('Verse'. '2')"
-
-
-Optional recall and override to 100% for a given snapshot on all faders. ("Breakdown button")
-Lua "Snapshots_Recall('Verse', '0', '100')"
-----------------------------------------------------------------------------------------------------------------
 ]]--
 
 
+
+
+
+
+-----------------------------------------------local------------------------------------------------------------
 
 require "gma3_helpers"
 
 
 
-
 local function main()
-  Printf("Snapshots is loaded, check plugin source code for documentation")
   --command to run when pressed
+  Printf("Snapshots is loaded, check plugin source code for documentation")
 end
 
 
 
 
 
---Store stuff
+--Store into table
 local function Snapshots_DBStore(datapool, page, fader, SnapshotName, MasterLevel)
 
   --Init a GLOBAL table
@@ -129,7 +90,7 @@ end
 
 
 
---GLOBALLY ACCESSED COMMANDS
+------------------------------------------------Global----------------------------------------------------------
 --Utillity to clear the table
 function Snapshots_Clear(SnapshotName)
   Snapshots[SnapshotName] = {}
@@ -153,6 +114,7 @@ end
 --Get the given exec and store the value 
 function Snapshots_Store(datapool, page, fader, SnapshotName)
 
+  --Get pool and page
   local x = Root()["ShowData"]
                   ["DataPools"]
                   [tonumber(datapool)]
@@ -166,17 +128,17 @@ function Snapshots_Store(datapool, page, fader, SnapshotName)
   for i = 1, #execs do
 
 
-    -- if fader number is correct
+    -- if exec number is correct
     if execs[i].NO == tonumber(fader) then
       local U = execs[i]
 
-      --Get fader value
+      --Get exec value
       local MasterLevel = Obj.GetFader(U, {
         "Master",
         0
       })
 
-
+      --Store into table
       Snapshots_DBStore(datapool, page, fader, SnapshotName, MasterLevel)
 
     end
@@ -185,7 +147,7 @@ function Snapshots_Store(datapool, page, fader, SnapshotName)
 
 
 
-  
+
 end
 
 
@@ -241,6 +203,9 @@ end
 
 
 
+
+
+----------------------------------------------------------------------------------------------------------------
 return main
 
 
