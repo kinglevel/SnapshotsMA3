@@ -80,4 +80,4 @@ git clone git@github.com:kinglevel/SnapshotsMA3.git
 
 ### HOW TO RUN IT:
 
-Just import the plugin in your show file, make the macros, and you should be all set.
+Just import the plugin in your showfile, make the macros, and you should be all set.
