@@ -16,7 +16,7 @@ With this plugin, the user can program "almost everything" at 100%, and mix it l
 This helps the operator to run the shows at ease and be able to adjust for these scenarios, semi-automatic, and more accurate.
 
 
-# KNOWN ISSUES:
+### KNOWN ISSUES:
 
 * It works with many diffent kinds of assigned masters on executors. Some may not work.
 * Fade times only work with some masters, as of 1.9.7.0.
@@ -24,7 +24,7 @@ This helps the operator to run the shows at ease and be able to adjust for these
 * Not tested in a network scenario, yet.
 
 
-## USAGE:
+### USAGE:
 
 Make sure to CLEAR a snapshot before updating executors into the snapshot.
 To store a snapshot, make a macro with multiple lines.
@@ -33,7 +33,7 @@ The structure is as follows: Snapshots_Store(datapool, page, executor, SnapshotN
 
 
 
-# To store a snapshot:
+#### To store a snapshot:
 ```
 Lua "Snapshots_Clear('Verse')"
 Lua "Snapshots_Store('1','1', '201', 'Verse')"
@@ -43,18 +43,18 @@ Lua "Snapshots_Store('1','1', '204', 'Verse')"
 ```
 
 
-# To recall a snapshot, simply make a macro with:
+#### To recall a snapshot, simply make a macro with:
 ```
 Lua "Snapshots_Recall('Verse')"
 ```
 
-# Optional add a fadetime:
+#### Optional add a fadetime:
 ```
 Lua "Snapshots_Recall('Verse'. '2')"
 ```
 
 
-# Optional recall and override to 100% for a given snapshot on all faders. ("Breakdown button")
+#### Optional recall and override to 100% for a given snapshot on all faders. ("Breakdown button")
 ```
 Lua "Snapshots_Recall('Verse', '0', '100')"
 ```
