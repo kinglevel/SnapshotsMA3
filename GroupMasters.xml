@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<GMA3 DataVersion="1.8.8.2">
-    <UserPlugin Name="GroupMasters" Guid="BA AD F0 0D 20 C4 45 01 46 E9 54 45 50 4B 9D A1" Author="LEDvard" Version="0.0.0.4" Path="/GroupMastersMA3">
-        <ComponentLua Name="GroupMasters" Guid="BA AD F0 0D C4 AF D7 57 65 7D 0E 54 2E 26 D3 A1" FileName="GroupMasters.lua" />
-    </UserPlugin>
-</GMA3>
