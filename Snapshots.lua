@@ -63,13 +63,10 @@ require "gma3_helpers"
 
 local function main()
   --command to run when pressed
-  Printf("Snapshots is loaded, check plugin source code for documentation")
+  Printf("Snapshots: Loaded")
+  Printf("Snapshots: Check plugin source code for documentation")
+  Printf("")
 end
-
-
-
-
-
 
 
 
@@ -95,16 +92,23 @@ end
 --Utillity to clear the table
 function Snapshots_Clear(SnapshotName)
   Snapshots[SnapshotName] = {}
-  Printf("SnapShots cleared")
+  Printf("Snapshots: cleared snapshot: " .. SnapshotName)
 end
 
 
 
+--Utillity to list the table
+function Snapshots_List(SnapshotName)
+  gma3_helpers:dump(Snapshots[SnapshotName])
+end
 
 
 
-
+----------------------------------------------------------------------------------------------------------------
+--File save system
 function Snapshots_Save(filename)
+
+  Printf("Snapshots: Saving savefile: " .. filename)
 
   local obj = Snapshots
 
@@ -124,8 +128,10 @@ end
 
 
 
-
+--File save system
 function Snapshots_Load(filename)
+
+  Printf("Snapshots: Loading savefile: " .. filename)
 
   local json = require "json"
 
@@ -141,12 +147,12 @@ function Snapshots_Load(filename)
     -- Read the entire content of the file
     content = file:read("*a")
     file:close()
-    
+
     local data = json.decode(content)
     Snapshots = data
 
   else
-      Printf("Unable to open the file.")
+      Printf("Snapshots: Unable to open the file: " .. filename)
   end
 
 end
@@ -155,19 +161,9 @@ end
 
 
 
---Utillity to list the table
-function Snapshots_List(SnapshotName)
-  gma3_helpers:dump(Snapshots[SnapshotName])
-end
-
-
-
-
-
+----------------------------------------------------MAIN FEATURES-----------------------------------------------------
 --Get the given exec and store the value 
 function Snapshots_Store(datapool, page, fader, SnapshotName)
-
-  --Printf("Storing..")
 
   --Get pool and page
   local x = Root()["ShowData"]
@@ -210,6 +206,8 @@ end
 
 --Set up and run the recall command
 function Snapshots_Recall(SnapshotName, fadeTime, overLevel)
+
+  Printf("Snapshots: Loading snapshot: " .. SnapshotName)
 
   --Init command
   local command = ""
@@ -256,12 +254,7 @@ end
 
 
 
-
-
-
-
-----------------------------------------------------------------------------------------------------------------
-
+-------------------------------------------------INIT-----------------------------------------------------------
 
 
 --init the snapshot var at plugin load
