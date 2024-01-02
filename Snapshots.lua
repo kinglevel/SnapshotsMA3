@@ -61,12 +61,37 @@ README: https://github.com/kinglevel/SnapshotsMA3
 
 require "gma3_helpers"
 
-
-
 local function main()
   --command to run when pressed
   Printf("Snapshots is loaded, check plugin source code for documentation")
 end
+
+
+
+
+
+
+
+local function SaveFile(obj)
+
+  local json = require "json"
+
+  local path = GetPathOverrideFor("gma3_library", "")
+  local path = path .. "/datapools/plugins/SnapshotsMA3/Snapshots.save"
+
+  local reqpath = GetPathOverrideFor("gma3_library", "")
+  local reqpath = reqpath .. "/datapools/plugins/SnapshotsMA3/dkjson.lua"
+
+  local data = json.encode(obj)
+  
+
+  -- Write to file
+  local file = io.open(path, "w")
+  file:write(data)
+  file:close()
+
+end
+
 
 
 
@@ -83,7 +108,7 @@ local function Snapshots_DBStore(datapool, page, fader, SnapshotName, MasterLeve
   local object = {datapool = datapool, page = page, fader=fader, SnapshotName=SnapshotName, MasterLevel=MasterLevel}
 
   table.insert(Snapshots[SnapshotName], object)
-  
+  SaveFile(Snapshots[SnapshotName])
 end
 
 
@@ -113,7 +138,7 @@ end
 --Get the given exec and store the value 
 function Snapshots_Store(datapool, page, fader, SnapshotName)
 
-  Printf("Storing..")
+  --Printf("Storing..")
 
   --Get pool and page
   local x = Root()["ShowData"]
