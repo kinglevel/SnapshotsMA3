@@ -115,7 +115,7 @@ function Snapshots_Save(filename)
   local json = require "json"
 
   local path = GetPathOverrideFor("gma3_library", "")
-  local path = path .. "/datapools/plugins/SnapshotsMA3/" .. filename .. ".save"
+  local path = path .. "/datapools/plugins/SnapshotsMA3/SaveFiles/" .. filename .. ".save"
 
   local data = json.encode(obj)
   
@@ -136,7 +136,7 @@ function Snapshots_Load(filename)
   local json = require "json"
 
   local path = GetPathOverrideFor("gma3_library", "")
-  local path = path .. "/datapools/plugins/SnapshotsMA3/" .. filename .. ".save"
+  local path = path .. "/datapools/plugins/SnapshotsMA3/SaveFiles/" .. filename .. ".save"
 
   -- read file
   local file = io.open(path, "r")
