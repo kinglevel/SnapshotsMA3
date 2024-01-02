@@ -71,7 +71,6 @@ end
 
 
 
-
 --Store into table
 local function Snapshots_DBStore(datapool, page, fader, SnapshotName, MasterLevel)
 
@@ -113,6 +112,8 @@ end
 
 --Get the given exec and store the value 
 function Snapshots_Store(datapool, page, fader, SnapshotName)
+
+  Printf("Storing..")
 
   --Get pool and page
   local x = Root()["ShowData"]
@@ -206,6 +207,13 @@ end
 
 
 ----------------------------------------------------------------------------------------------------------------
+
+
+
+--init the snapshot var at plugin load
+Snapshots = {}
+
+
 return main
 
 
