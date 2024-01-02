@@ -72,28 +72,6 @@ end
 
 
 
-local function SaveFile(obj)
-
-  local json = require "json"
-
-  local path = GetPathOverrideFor("gma3_library", "")
-  local path = path .. "/datapools/plugins/SnapshotsMA3/Snapshots.save"
-
-  local reqpath = GetPathOverrideFor("gma3_library", "")
-  local reqpath = reqpath .. "/datapools/plugins/SnapshotsMA3/dkjson.lua"
-
-  local data = json.encode(obj)
-  
-
-  -- Write to file
-  local file = io.open(path, "w")
-  file:write(data)
-  file:close()
-
-end
-
-
-
 
 
 --Store into table
@@ -108,7 +86,6 @@ local function Snapshots_DBStore(datapool, page, fader, SnapshotName, MasterLeve
   local object = {datapool = datapool, page = page, fader=fader, SnapshotName=SnapshotName, MasterLevel=MasterLevel}
 
   table.insert(Snapshots[SnapshotName], object)
-  SaveFile(Snapshots[SnapshotName])
 end
 
 
@@ -121,6 +98,58 @@ function Snapshots_Clear(SnapshotName)
   Printf("SnapShots cleared")
 end
 
+
+
+
+
+
+
+function Snapshots_Save(filename)
+
+  local obj = Snapshots
+
+  local json = require "json"
+
+  local path = GetPathOverrideFor("gma3_library", "")
+  local path = path .. "/datapools/plugins/SnapshotsMA3/" .. filename .. ".save"
+
+  local data = json.encode(obj)
+  
+  -- Write to file
+  local file = io.open(path, "w")
+  file:write(data)
+  file:close()
+
+end
+
+
+
+
+function Snapshots_Load(filename)
+
+  local json = require "json"
+
+  local path = GetPathOverrideFor("gma3_library", "")
+  local path = path .. "/datapools/plugins/SnapshotsMA3/" .. filename .. ".save"
+
+  -- read file
+  local file = io.open(path, "r")
+  -- init buffer
+  local content = ""
+
+  if file then
+    -- Read the entire content of the file
+    content = file:read("*a")
+    file:close()
+    
+    local data = json.decode(content)
+    Snapshots = data
+
+  else
+      Printf("Unable to open the file.")
+  end
+
+end
 
 
 
