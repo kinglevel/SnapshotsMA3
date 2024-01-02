@@ -26,7 +26,7 @@ This helps the operator to run the shows at ease and be able to adjust for these
 
 * It works with many diffent kinds of assigned masters on executors. Some may not work.
 * Fade times only work with some masters, as of 1.9.7.0.
-* Values stored into snapshots may not live between showfile loads or console reboots.
+* Values stored into snapshots may not live between showfile loads or console reboots. Therefore a savesystem is present.
 * Not tested in a network scenario, yet.
 * Loads lua code globally, probably a better way to do it.
 
