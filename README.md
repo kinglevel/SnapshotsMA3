@@ -62,6 +62,17 @@ Lua "Snapshots_Recall('Verse'. '2')"
 Lua "Snapshots_Recall('Verse', '0', '100')"
 ```
 
+#### Save all snapshots:
+You can save all snapshot into a file
+```
+Lua "Snapshots_Save('ShootingDay1')"
+```
+
+#### Load all saved snapshots:
+You can load all saved snapshot
+```
+Lua "Snapshots_Load('ShootingDay1')"
+```
 
 
 ### INSTALLATION:
