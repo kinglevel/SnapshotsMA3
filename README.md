@@ -27,6 +27,8 @@ This helps the operator to run the shows at ease and be able to adjust for these
 
 ### USAGE:
 
+Load the plugin, press it once to init the save system.
+
 Make sure to CLEAR a snapshot before updating executors into the snapshot.
 To store a snapshot, make a macro with multiple lines.
 The structure is as follows: Snapshots_Store(datapool, page, executor, SnapshotName)
