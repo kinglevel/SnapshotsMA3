@@ -4,6 +4,12 @@ This plugins enables the user to store and recall fader positions into Snapshots
 It can for example be very usefull when running a timecoded show, when the user wants to recall multiple Groupmasters
 or other executors into different positions.
 
+It also goes well with:
+* Cinematography
+* Broadcast
+* Events
+
+
 When a songs goes into different song structures, for example Verse, Chorus, Refrain, Bridge, Solo, this can be especially useful.
 
 With this plugin, the user can program "almost everything" at 100%, and mix it later, "live".
