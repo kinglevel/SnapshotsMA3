@@ -530,6 +530,10 @@ local function buildObjRow(grid, i, r, swatch)
   end
   -- the CheckBox tick (col 3) — this IS the assignment. State 0/1 + Clicked signal.
   local cb = grid:Append("CheckBox"); cb.Anchors = { left = 3, right = 3, top = top, bottom = top }
+  -- center the tick square in the cell — the CheckBox defaults ICONALIGNMENTH=Left (with a 12px
+  -- content margin), which shoves the box against the left edge and leaves an empty label gap to
+  -- the scrollbar. Centering it reads as a tidy, deliberately-placed tick.
+  pcall(function() cb.IconAlignmentH = "Center" end)
   pcall(function() cb.State = (r.ticked and 1 or 0) end)
   cb.Name = "ObjTick_" .. tostring(r.key)
   local gated = (M._selected ~= nil) and (M._selectedType ~= nil)
