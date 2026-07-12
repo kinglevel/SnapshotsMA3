@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GMA3 DataVersion="2.4.2.2">
+    <UserPlugin
+        Name="Snapshots"
+        Version="2.0.0.0"
+        Path="/Snapshots"
+        Guid="89979370-3D70-434F-9ABF-1BEC97AD123D">
+        <!-- Entry point declared FIRST. Name EXACTLY "Snapshots" or import fails "Illegal object". -->
+        <ComponentLua Name="Snapshots" FileName="Snapshots.lua" />
+        <!-- The ONE real nested stub — proves nested-FileName resolution + deploy tree-preservation. -->
+        <ComponentLua Name="version"   FileName="lib/version.lua" />
+        <ComponentLua Name="num"       FileName="lib/num.lua" />
+        <ComponentLua Name="monitor"   FileName="lib/monitor.lua" />
+        <ComponentLua Name="schema"    FileName="lib/schema.lua" />
+        <ComponentLua Name="args"      FileName="lib/args.lua" />
+        <ComponentLua Name="model"     FileName="lib/model.lua" />
+        <ComponentLua Name="fade"      FileName="lib/fade.lua" />
+        <ComponentLua Name="breakdown" FileName="lib/breakdown.lua" />
+        <ComponentLua Name="store"     FileName="lib/store.lua" />
+        <ComponentLua Name="ma3"       FileName="lib/ma3.lua" />
+        <ComponentLua Name="dispatch"  FileName="lib/dispatch.lua" />
+        <ComponentLua Name="manager"    FileName="lib/manager.lua" />
+        <ComponentLua Name="assign"     FileName="lib/assign.lua" />
+        <ComponentLua Name="ui_manager" FileName="lib/ui/manager.lua" />
+        <ComponentLua Name="ui_theme"   FileName="lib/ui/theme.lua" />
+        <!-- Topbar search + About/Donate/Feedback (quick 260712-nxc). Nested FileName preserved by deploy. -->
+        <ComponentLua Name="qrcode"      FileName="lib/qrcode.lua" />
+        <ComponentLua Name="http"        FileName="lib/http.lua" />
+        <ComponentLua Name="paths"       FileName="lib/paths.lua" />
+        <ComponentLua Name="search"      FileName="lib/search.lua" />
+        <ComponentLua Name="ui_about"    FileName="lib/ui/about.lua" />
+        <ComponentLua Name="ui_donate"   FileName="lib/ui/donate.lua" />
+        <ComponentLua Name="ui_feedback" FileName="lib/ui/feedback.lua" />
+    </UserPlugin>
+</GMA3>

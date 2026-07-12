@@ -1,0 +1,18 @@
+# AI assistant instructions / config (not part of the plugin)
+CLAUDE.md
+AGENTS.md
+GEMINI.md
+.cursorrules
+.windsurfrules
+.aider*
+.github/copilot-instructions.md
+.claude/
+.cursor/
+
+# Planning / workspace
+.planning/
+
+# OS / build cruft
+.DS_Store
+__pycache__/
+*.pyc

@@ -1,0 +1,10 @@
+-- .busted — alternate driver (D-07). `lua tests/run_all.lua` is the authoritative gate.
+-- lpath includes ./lib/vendor so require("json") resolves under busted too.
+return {
+  default = {
+    ROOT = { "tests" },
+    pattern = "test_.*%.lua$",
+    lpath = "./lib/?.lua;./lib/vendor/?.lua;./tests/?.lua",
+    output = "gtest",
+  },
+}
