@@ -120,6 +120,22 @@ function Ma3.notify(msg)
   pcall(function() Printf(msg) end)                                    -- UNCHANGED
 end
 
+-- Current showfile identity — the loaded show's file name (e.g. "MyShow"), read from
+-- Root().ManetSocket.Showfile (the accessor the firmware system-tests use; the .show
+-- suffix is stripped if present). This is the ONLY signal that changes when a different
+-- show is loaded: nothing in the Lua VM resets on a show reload (module locals + UserVars
+-- all survive per the lifecycle survival matrix), so the "is this a fresh show?" check
+-- compares this live value against a remembered one. Returns a non-empty string, or nil
+-- when unreadable/empty (off-desk, load race) — callers treat nil as "unknown, do nothing".
+function Ma3.current_showfile()
+  local name
+  pcall(function() name = Root().ManetSocket.Showfile end)
+  if type(name) ~= "string" then return nil end
+  name = (name:gsub("%.show$", ""))
+  if name == "" then return nil end
+  return name
+end
+
 -- Walk the live-verified pool tree and build the byGuid index (OBJ-02). Each child
 -- is guarded by Get("GUID",0); only string, non-empty, ≠"nil" guids are kept, so a
 -- placeholder slot (Pitfall 4: :Children() returns 13 slots for 1 real sequence)

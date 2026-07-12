@@ -1019,6 +1019,26 @@ function M.open(deps)
     pcall(function() if deps and deps.notify then deps.notify("[ui.manager] open error: " .. tostring(err)) end end)
   end
   pcall(function() M.refreshMonitor() end)   -- initial paint of the System Monitor strip
+  pcall(function() M.maybeShowFirstRunQR() end)   -- QR on the first open per loaded show
+end
+
+-- ── M.maybeShowFirstRunQR — auto-open the QR overlay on the FIRST manager open after a
+-- showfile is loaded. "First per show" is detected by comparing the live show identity
+-- (Snapshots.ma3.current_showfile) against M._qrShownForShow — a MODULE-LEVEL marker that
+-- survives plugin re-opens but resets on an MA3 restart. That is exactly right: within a
+-- session it fires once per show (and again when a DIFFERENT show is loaded, since the name
+-- changes); after a reboot the marker is nil and the auto-loaded show re-fires it (a reboot
+-- IS a fresh showfile load). A persistent UserVar would WRONGLY suppress the QR post-reboot.
+-- Known limitation: reloading the SAME show name in one session won't re-fire (the identity
+-- is unchanged) — acceptable, and the operator can still open the QR from About → Donate.
+-- Fail-safe: an unreadable show name (nil) never fires and never crashes the open.
+function M.maybeShowFirstRunQR()
+  local cur
+  pcall(function() cur = Snapshots.ma3 and Snapshots.ma3.current_showfile() end)
+  if not cur then return end                 -- unknown show → do nothing (never spam/crash)
+  if M._qrShownForShow == cur then return end -- already shown for this loaded show
+  M._qrShownForShow = cur                     -- mark BEFORE opening (one-shot, even if open fails)
+  pcall(function() if Snapshots.ui and Snapshots.ui.donate then Snapshots.ui.donate.open() end end)
 end
 
 -- ── M.refresh — rebuild ONLY the list body + re-derive action enabled-state ────
